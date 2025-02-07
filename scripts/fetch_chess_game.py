@@ -4,7 +4,7 @@ import chess.svg
 import svgwrite
 
 # --- CONFIGURATION ---
-USERNAME = "YOUR_USERNAME"  # Replace with your Chess.com or Lichess username
+USERNAME = "itsXIGIE"  # Replace with your Chess.com or Lichess username
 SOURCE = "chess.com"  # Options: "chess.com" or "lichess"
 OUTPUT_FILE = "chess-board.svg"
 
