@@ -1,0 +1,34 @@
+name: Update Chess Board
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"  # Runs every 6 hours
+  workflow_dispatch:  # Allows manual execution
+
+jobs:
+  update-board:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set Up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.x"
+
+      - name: Install Dependencies
+        run: pip install requests cairosvg chess svgwrite
+
+      - name: Fetch Latest Chess Game & Generate Board
+        run: python scripts/fetch_chess_game.py
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add chess-board.svg
+          git commit -m "Update Chess Board"
+          git push
